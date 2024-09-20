@@ -14,7 +14,7 @@ nowPlayingBtn.addEventListener("click", () => fetchMovies("now_playing"));
 popularBtn.addEventListener("click", () => fetchMovies("popular"));
 topRatedBtn.addEventListener("click", () => fetchMovies("top_rated"));
 upcomingBtn.addEventListener("click", () => fetchMovies("upcoming"));
-
+// ################################################################################ This section is for the search functionality where I will fetch the movies based on the search query.
 // This is where I will fetch the movies from the API
 function fetchMovies(type) {
   fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}&language=en-US&page=1`) // Here I am fetching the movies from the API
@@ -33,6 +33,9 @@ function fetchMovies(type) {
     })
     .catch((error) => console.error("Error fetching data:", error));
 }
+//################################################################################
+
+// ############################################################################### In this section I will display the movies on the page. Using the displayMovies function and adding an event listener to the movie card to redirect to the movie's page on TMDb.
 
 // Okay, here I am going to display the movies and add click event listener to redirect to movie's page
 function displayMovies(movies) {

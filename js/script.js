@@ -43,18 +43,21 @@ function displayMovies(movies) {
   movies.forEach((movie) => {
     // This is a loop that goes through each movie and creates a card for it.
     const movieCard = document.createElement("div"); // this is a div element that will contain the movie's details.
-    movieCard.classList.add("bg-gray-800", "p-4", "mt-10", "rounded-lg", "shadow-md", "hover:shadow-xl", "transition-shadow", "duration-300", "transform", "transition-transform", "duration-300", "hover:scale-105", "cursor-pointer", "h-auto");
+    movieCard.classList.add("bg-white", "p-4", "rounded-lg", "shadow-md", "hover:shadow-xl", "transition-shadow", "transform", "transition-transform", "duration-300", "hover:scale-105", "cursor-pointer");
 
     const movieImage = movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : "https://via.placeholder.com/500x750";
 
     // This is where I show the movie's details on the card. Im using innerHTML to add the movie's details to the card.
+
     movieCard.innerHTML = `
-        <img src="${movieImage}" alt="${movie.title}" class="rounded-md mb-4 w-full h-auto">
-        <h2 class="text-xl font-bold mb-2">${movie.title}</h2>
-        <p class="text-sm mb-2">${movie.release_date}</p>
-        <p class="text-sm mb-4 truncate">${movie.overview}</p>
-        <p class="font-bold text-yellow-500">Rating: ${movie.vote_average}</p>
-      `;
+      <div class="overflow-hidden rounded-md mb-4">
+       <img src="${movieImage}" alt="${movie.title}" class="w-full h-auto "/>
+      </div>
+      <h2 class="text-xl font-bold mb-2 text-gray-800">${movie.title}</h2>
+      <p class="text-sm text-gray-600">${movie.release_date}</p>
+      <p class="text-sm mb-4 truncate text-gray-600">${movie.overview}</p> 
+      <p class="font-bold text-green-500">Rating: ${movie.vote_average}</p>
+    `;
 
     // Here I will add an event listener to the movie card to redirect to the movie's page on TMDb so it will be clickable.
     movieCard.addEventListener("click", () => {

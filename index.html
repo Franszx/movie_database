@@ -7,16 +7,17 @@
     <script defer src="js/script.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   </head>
-  <body class="bg-gray-200 text-white">
-    <header class="bg-gray-900 p-6 shadow-lg">
-      <h1 class="text-7xl font-extrabold tracking-tighter text-center text-green-400 uppercase">The Movie Database</h1>
-      <div class="text-center">
-        <button id="nowPlayingBtn" class="bg-yellow-500 text-lg hover:bg-green-400 text-gray-900 font-bold py-2 px-10 m-2 rounded-xl shadow-lg">Now Playing</button>
-        <button id="popularBtn" class="bg-yellow-500 text-lg hover:bg-green-400 text-gray-900 font-bold py-2 px-10 m-2 rounded-xl shadow-md">Popular</button>
-        <button id="topRatedBtn" class="bg-yellow-500 text-lg hover:bg-green-400 text-gray-900 font-bold py-2 px-10 m-2 rounded-xl shadow-md">Top Rated</button>
-        <button id="upcomingBtn" class="bg-yellow-500 text-lg hover:bg-green-400 text-gray-900 font-bold py-2 px-10 m-2 rounded-xl shadow-md">Upcoming</button>
+  <body class="bg-gray-300 text-gray-900">
+    <header class="bg-green-900 p-8 shadow-lg">
+      <h1 class="text-7xl font-extrabold tracking-tighter text-center text-gray-200 uppercase mb-6">The Movie Database</h1>
+      <div class="flex flex-wrap justify-center space-x-4">
+        <button id="nowPlayingBtn" class="bg-green-500 text-lg hover:bg-green-300 text-gray-100 font-bold py-2 px-10 m-2 rounded-xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105">Now Playing</button>
+        <button id="popularBtn" class="bg-green-500 text-lg hover:bg-green-300 hover:text-white text-gray-100 font-bold py-2 px-10 m-2 rounded-xl shadow-md transition duration-300 ease-in-out transform hover:scale-105">Popular</button>
+        <button id="topRatedBtn" class="bg-green-500 text-lg hover:bg-green-300 hover:text-white text-gray-100 font-bold py-2 px-10 m-2 rounded-xl shadow-md transition duration-300 ease-in-out transform hover:scale-105">Top Rated</button>
+        <button id="upcomingBtn" class="bg-green-500 text-lg hover:bg-green-300 hover:text-white text-gray-100 font-bold py-2 px-10 m-2 rounded-xl shadow-md transition duration-300 ease-in-out transform hover:scale-105">Upcoming</button>
       </div>
     </header>
-    <section id="movieList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4"></section>
+    <section id="movieList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4 my-4"></section>
+    <footer class="bg-green-900 p-8 shadow-lg"></footer>
   </body>
 </html>

@@ -1,65 +1,66 @@
-const API_KEY = "af8c9e3c5e7ef1503d9793e7f012e887"; // This is the API key that I will use to fetch the movies from the API.
-const BASE_URL = "https://api.themoviedb.org/3"; // This is the base URL of the API.
-const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"; // This is the base URL for the images of the movies.
+const API_KEY = "af8c9e3c5e7ef1503d9793e7f012e887";
+const BASE_URL = "https://api.themoviedb.org/3";
+const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
-// This is the code that will fetch the elements from the HTML file. And I will use these elements to display the movies.
+const options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhZjhjOWUzYzVlN2VmMTUwM2Q5NzkzZTdmMDEyZTg4NyIsIm5iZiI6MTcyNjY2MjI0Ny40OTQ3MzcsInN1YiI6IjY2ZWFjMWFlMWJlY2E4Y2UwN2QzNmIxMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.djl3lisejtThd3VZUTvHZS9AiP1EjMnw13BBE1dUjw0",
+  },
+};
+
+// Get references to the HTML elements
 const movieList = document.getElementById("movieList");
 const nowPlayingBtn = document.getElementById("nowPlayingBtn");
 const popularBtn = document.getElementById("popularBtn");
 const topRatedBtn = document.getElementById("topRatedBtn");
 const upcomingBtn = document.getElementById("upcomingBtn");
 
-// Event Listeners for all buttons, so when clicked, it will fetch the movies from the API.
+// Add event listeners to the buttons
 nowPlayingBtn.addEventListener("click", () => fetchMovies("now_playing"));
 popularBtn.addEventListener("click", () => fetchMovies("popular"));
 topRatedBtn.addEventListener("click", () => fetchMovies("top_rated"));
 upcomingBtn.addEventListener("click", () => fetchMovies("upcoming"));
-// ################################################################################ This section is for the search functionality where I will fetch the movies based on the search query.
-// This is where I will fetch the movies from the API
-function fetchMovies(type) {
-  fetch(`${BASE_URL}/movie/${type}?api_key=${API_KEY}&language=en-US&page=1`) // Here I am fetching the movies from the API
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`); // This is an error handling code that will throw an error if the response is not okay. THROW means that it will stop the code from running and display the error message.
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (data.results) {
-        displayMovies(data.results);
-      } else {
-        throw new Error("No results found");
-      }
-    })
-    .catch((error) => console.error("Error fetching data:", error));
+
+// Function to fetch movies from the API
+async function fetchMovies(type) {
+  try {
+    const response = await fetch(`${BASE_URL}/movie/${type}?language=en-US&page=1`, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    if (data.results) {
+      displayMovies(data.results);
+    } else {
+      throw new Error("No results found");
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 }
-//################################################################################
 
-// ############################################################################### In this section I will display the movies on the page. Using the displayMovies function and adding an event listener to the movie card to redirect to the movie's page on TMDb.
-
-// Okay, here I am going to display the movies and add click event listener to redirect to movie's page
+// Function to display movies on the page
 function displayMovies(movies) {
-  movieList.innerHTML = ""; // Here I clear the previous movies by setting innerHTML to empty string like so.
+  movieList.innerHTML = ""; // Clear the previous movies
+
   movies.forEach((movie) => {
-    // This is a loop that goes through each movie and creates a card for it.
-    const movieCard = document.createElement("div"); // this is a div element that will contain the movie's details.
-    movieCard.classList.add("bg-white", "p-4", "rounded-lg", "shadow-md", "hover:shadow-xl", "transition-shadow", "transform", "transition-transform", "duration-300", "hover:scale-105", "cursor-pointer");
+    const movieCard = document.createElement("div");
+    movieCard.classList.add("movie-card");
 
     const movieImage = movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : "https://via.placeholder.com/500x750";
 
-    // This is where I show the movie's details on the card. Im using innerHTML to add the movie's details to the card.
+    const truncatedOverview = truncateText(movie.overview, 8);
 
     movieCard.innerHTML = `
-      <div class="overflow-hidden rounded-md mb-4">
-       <img src="${movieImage}" alt="${movie.title}" class="w-full h-auto "/>
-      </div>
-      <h2 class="text-xl font-bold mb-2 text-gray-800">${movie.title}</h2>
-      <p class="text-sm text-gray-600">${movie.release_date}</p>
-      <p class="text-sm mb-4 truncate text-gray-600">${movie.overview}</p> 
-      <p class="font-bold text-green-500">Rating: ${movie.vote_average}</p>
+      <img src="${movieImage}" alt="${movie.title}">
+      <h2>${movie.title}</h2>
+      <p>${movie.release_date}</p>
+      <p>${truncatedOverview}</p>
+      <p class="rating">Rating: ${movie.vote_average}</p>
     `;
 
-    // Here I will add an event listener to the movie card to redirect to the movie's page on TMDb so it will be clickable.
     movieCard.addEventListener("click", () => {
       window.location.href = `https://www.themoviedb.org/movie/${movie.id}`;
     });
@@ -68,5 +69,13 @@ function displayMovies(movies) {
   });
 }
 
-// As a default I choose to display the now playing movies when the page loads.
+function truncateText(text, wordLimit) {
+  const words = text.split(" ");
+  if (words.length > wordLimit) {
+    return words.slice(0, wordLimit).join(" ") + "...";
+  }
+  return text;
+}
+
+// Fetch and display now playing movies when the page loads
 fetchMovies("now_playing");

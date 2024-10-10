@@ -1,4 +1,5 @@
-const API_KEY = "af8c9e3c5e7ef1503d9793e7f012e887"; // API key for The Movie Database
+import /
+
 const BASE_URL = "https://api.themoviedb.org/3"; // Base URL for the API
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"; // Base URL for images
 

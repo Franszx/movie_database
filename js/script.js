@@ -1,4 +1,4 @@
-import /
+import { API_KEY } from "./info.js";
 
 const BASE_URL = "https://api.themoviedb.org/3"; // Base URL for the API
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"; // Base URL for images

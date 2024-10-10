@@ -1,0 +1,31 @@
+{
+  "name": "movieDatabasePackage",
+  "version": "1.0.0",
+  "description": "Rules for javascript",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anders Lindberg",
+  "license": "MIT",
+  "eslintConfig": {
+    "rules": {
+      "semi": ["error", "always"], // Forces the use of a semicolon at the end of each statement
+      "quotes": ["error", "single"], // Forces the use of single quotes for strings
+      "camelcase": "error", // Forces camelcase and prevents the use of the dash or underscore
+      "eqeqeq": "error", // Forces the use of === over ==
+      "no-console": "warn", // Prevents the use of the console
+      "no-sparse-arrays": "warn", // Forbids the existence of empty values in array declarations
+      "no-cond-assign": "warn", // Prevents assignments in conditions (although maybe that is desired)
+      "no-constant-condition": "warn", // Forbids constant conditions (e.g., if (true), or if (1 === 1))
+      "brace-style": "error", // Forces opening curly braces to be in the control line that starts them
+      "no-template-curly-in-string": "error", // Prevents template literals in regular strings (without backticks)
+      "no-array-constructor": "error", // Forces the declaration of arrays with bracket notation
+      "no-new-object": "error", // Prevents the declaration of generic objects with new Object();
+      "yoda": "error", // Expects vars to be compared with values, not the other way around
+      "no-nested-ternary": "error", // Prevents nesting ternary operator expressions
+      "space-infix-ops": "error", // Forces spaces around operators
+      "no-empty": "warn" // Forbids empty code blocks under if, else, for, while, or do while
+    }
+  }
+}
